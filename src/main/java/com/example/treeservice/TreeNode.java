@@ -9,4 +9,6 @@ import lombok.Data;
 public class TreeNode {
     @Id
     private Long id;
+    private Boolean isRoot;
+    private String label;
 }
