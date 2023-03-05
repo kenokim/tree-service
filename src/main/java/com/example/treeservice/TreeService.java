@@ -13,6 +13,7 @@ import java.util.Optional;
 public class TreeService {
     private final TreeNodeRepository treeNodeRepository;
     private final TreeEdgeRepository treeEdgeRepository;
+    private final TreeStrategy treeStrategy;
 
     public TreeDto getTree(Long rootId) {
         TreeDto treeDto = new TreeDto();
@@ -26,5 +27,12 @@ public class TreeService {
             break;
         }
         return null;
+    }
+
+    public TreeDto getTreeByGroupId(Long groupId) {
+        List<TreeNode> nodes = treeNodeRepository.findAllByGroupId(groupId);
+        List<TreeEdge> edges = treeEdgeRepository.findAllByGroupId(groupId);
+
+        return treeStrategy.construct(nodes, edges);
     }
 }
