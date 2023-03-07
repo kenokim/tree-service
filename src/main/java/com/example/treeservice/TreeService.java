@@ -29,6 +29,15 @@ public class TreeService {
         return null;
     }
 
+    @Transactional
+    public void addTreeNode(Long groupId, String name, Long parentNodeId) {
+        TreeNode parent = treeNodeRepository.findById(parentNodeId).get();
+        TreeNode child = new TreeNode(null, false, name, groupId);
+        TreeEdge edge = new TreeEdge(null, parent, child, groupId);
+        treeNodeRepository.save(child);
+        treeEdgeRepository.save(edge);
+    }
+
     public TreeDto getTreeByGroupId(Long groupId) {
         List<TreeNode> nodes = treeNodeRepository.findAllByGroupId(groupId);
         List<TreeEdge> edges = treeEdgeRepository.findAllByGroupId(groupId);
