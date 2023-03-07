@@ -15,4 +15,11 @@ public class TreeServiceTest {
         TreeDto treeDto = treeService.getTreeByGroupId(groupId);
         System.out.println(treeDto);
     }
+
+    @Test
+    void get_tree_test2() {
+        Long groupId = 2L;
+        TreeDto treeDto = treeService.getTreeByGroupId(groupId);
+        System.out.println(treeDto);
+    }
 }
